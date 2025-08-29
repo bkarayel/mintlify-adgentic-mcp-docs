@@ -1,0 +1,5 @@
+<div style={{float: 'right', display: 'flex', gap: '12px', alignItems: 'center'}}>
+  <a href="#" onClick={(e)=>{e.preventDefault(); navigator.clipboard?.writeText(document.documentElement.innerText);}} title="Copy page">📋 Copy page</a>
+  <a href="#" onClick={(e)=>{e.preventDefault(); window.open(window.location.href + '?view=md','_blank');}} title="View as Markdown">📝 View as Markdown</a>
+</div>
+<div style={{clear:'both'}} />

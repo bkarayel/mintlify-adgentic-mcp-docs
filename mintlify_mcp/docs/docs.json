@@ -1,0 +1,43 @@
+{
+  "name": "Adgentic",
+  "logo": "/adgentic-light.svg",
+  "theme": "maple",
+  "colors": { "primary": "#FFAF4C" },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Introduction",
+        "pages": ["introduction"]
+      },
+      {
+        "group": "MCP Server",
+        "pages": [
+          "what-you-get",
+          "how-it-works",
+          "match-adgentic-products-tool",
+          "authentication",
+          "deployment-details",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "API",
+        "pages": [
+          "api-overview",
+          "api-how-to-call",
+          "api-parameters",
+          "api-setup-installation",
+          "api-how-to-request"
+        ]
+      }
+    ]
+  },
+  "topbarLinks": [
+    { "name": "github", "url": "https://github.com/adgentic" }
+  ],
+  "head": {
+    "links": [
+      { "rel": "stylesheet", "href": "/style.css" }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+/* public/styles.css */
+.site-header a svg {
+  color: var(--mint-c-text);
+}
+/* Bazı temalarda kök kapsayıcı .mintlify olur; varsa bu da çalışır */
+.mintlify .site-header a svg {
+  color: var(--mint-c-text);
+}
+
