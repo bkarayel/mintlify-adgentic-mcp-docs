@@ -1,9 +1,8 @@
 ---
-title: GET adgentic_products
-description: Retrieve structured product offers based on a user's query.
+title: "GET adgentic_products"
+description: "Retrieve structured product offers based on a user's query."
 openapi: "GET /endpoint"
 ---
-
 
 import Copy from "/snippets/_copy-actions.mdx"
 import Feedback from "/snippets/_feedback.mdx"
@@ -12,9 +11,8 @@ import Feedback from "/snippets/_feedback.mdx"
 
 <Copy />
 
-
-**Endpoint:** <code>GET /adgentic_products</code>
-
+**Endpoint:** <code>
+GET /adgentic_products</code>
 
 ### Query Parameters:
 
@@ -22,102 +20,136 @@ import Feedback from "/snippets/_feedback.mdx"
   The user's search or request.
 </ParamField>
 
-
-<ParamField path="country" type="string" optional>
+<ParamField path="country" type="string">
   Country code for localized results.
 </ParamField>
 
-
 <Panel>
-<RequestExample>
+  <RequestExample>
+    ```bash Python Request Code Snippet
+    import requests
 
-```bash Python Request Code Snippet
-import requests
+    headers = {
+      "Content-Type": "application/json",
+      "ADGENTIC-API-Key": "YOUR_ADGENTIC_API_KEY"
+    }
 
-headers = {
-  "Content-Type": "application/json",
-  "ADGENTIC-API-Key": "YOUR_ADGENTIC_API_KEY"
-}
-
-payload = {
-  "prompt": "I want to buy a smartwatch",
-  "context": {
-      "country": "US"
-  }
-}
-
-response = requests.post("https://adgentic-gateway-api-869728233318.us-central1.run.app/api/v1/query", json=payload, headers=headers)
-print(response.json())
-```
-
-```json Sample Response
-{
-  "response": true,
-  "products": [
-    {
-      "basic_identity": {
-        "product_title": "Classic Red Sneakers",
-        "product_description": "Red running shoes for men and women",
-        "product_link": "https://shop.example.com/products/987",
-        "product_image_link": "https://cdn.example.com/products/red-shoes.jpg",
-        "currency": "USD",
-        "price": 89.0,
-        "availability": "In Stock",
-        "brand": "Example Brand"
-      },
-      "advertiser_info": {
-        "advertiser_name": "Example Shop",
-        "advertiser_website": "https://shop.example.com",
-        "advertiser_logo": "https://cdn.example.com/logo.png",
-        "advertiser_category": "Footwear & Apparel"
-      },
-      "monetization_info": {
-        "commission_rate": "12%",
-        "referral_period": "30 days"
+    payload = {
+      "prompt": "I want to buy a smartwatch",
+      "context": {
+          "country": "US"
       }
     }
-  ]
-}
 
-```
+    response = requests.post("https://adgentic-gateway-api-869728233318.us-central1.run.app/api/v1/query", json=payload, headers=headers)
+    print(response.json())
+    ```
 
-</RequestExample>
+    ```json Sample Response
+    {
+      "response": true,
+      "products": [
+        {
+          "basic_identity": {
+            "product_title": "Classic Red Sneakers",
+            "product_description": "Red running shoes for men and women",
+            "product_link": "https://shop.example.com/products/987",
+            "product_image_link": "https://cdn.example.com/products/red-shoes.jpg",
+            "currency": "USD",
+            "price": 89.0,
+            "availability": "In Stock",
+            "brand": "Example Brand"
+          },
+          "physical_characteristics": {
+            "color": "Red",
+            "size": "US 9",
+            "weight": "0.8 kg",
+            "material": "Synthetic Mesh"
+          },
+          "technical_specs": {
+            "sku": "SNK-RED-987",
+            "dimensions": "30 x 10 x 12 cm"
+          },
+          "functional_features": {
+            "water_resistant": false,
+            "breathable": true,
+            "slip_resistant": true
+          },
+          "compatability": {
+            "gender": ["Men", "Women"],
+            "sports": ["Running", "Casual Wear"]
+          },
+          "performance_metrics": {
+            "durability_score": 8.5,
+            "comfort_rating": 9.2
+          },
+          "content_and_packaging": {
+            "box_contents": ["1 Pair Sneakers"],
+            "packaging_material": "Recyclable Cardboard"
+          },
+          "warrant_and_certification": {
+            "warranty_period": "12 months",
+            "certifications": ["ISO 9001"]
+          },
+          "sustainability": {
+            "eco_friendly_materials": true,
+            "recyclable": true
+          },
+          "review_metrics": {
+            "average_rating": 4.6,
+            "review_count": 254
+          },
+          "user_context_tags": {
+            "ideal_use_case": "Daily running and casual wear",
+            "persona_fit": "Active lifestyle, fashion-conscious",
+            "lifestyle_alignment": "Urban, sporty"
+          },
+          "advertiser_info": {
+            "advertiser_name": "Example Shop",
+            "advertiser_website": "https://shop.example.com",
+            "advertiser_logo": "https://cdn.example.com/logo.png",
+            "advertiser_category": "Footwear & Apparel"
+          },
+          "monetization_info": {
+            "commission_rate": "12%",
+            "referral_period": "30 days"
+          }
+        }
+      ]
+    }
+    ```
+  </RequestExample>
 </Panel>
 
-## Enhanced Adgentic Product Attributes
+## Enriched Product Attributes
 
-
-| **Category**                    | **Field**            | **Type**     | **Description**                                                                                    |
-| ------------------------------- | -------------------- | ------------ | -------------------------------------------------------------------------------------------------- |
-| **product\_identity**           | product\_title       | string       | Name of the product (enriched).                                                                    |
-|                                 | product\_description | string       | Text description explaining the product (enriched).                                                |
-|                                 | product\_link        | string (URL) | Tracking link to the product detail page.                                                          |
-|                                 | product\_image\_link | string (URL) | URL of the main product image.                                                                     |
-|                                 | currency             | string       | Currency code (ISO 4217, e.g., USD, EUR).                                                          |
-|                                 | price                | numeric      | Current product price.                                                                             |
-|                                 | availability         | string       | Stock status (e.g., “In Stock”, “Out of Stock”, “Preorder”).                                       |
-|                                 | brand                | string       | Manufacturer or seller’s brand name.                                                               |
-| **physical\_characteristics**   | —                    | string       | Tangible, visible product attributes (e.g., color, size, weight, material).                        |
-| **technical\_specs**            | —                    | string       | Hardware, electronic or digital specifications (e.g., battery life, connectivity, power rating).   |
-| **functional\_features**        | —                    | string       | Usability-related attributes (e.g., water resistance, modes of operation, safety features).        |
-| **compatibility**               | —                    | string       | Contexts and supported systems (e.g., device compatibility, universal fit, target audience).       |
-| **performance\_metrics**        | —                    | numeric      | Quantifiable product performance (e.g., speed, noise level, battery duration, comfort rating).     |
-| **content\_and\_packaging**     | —                    | string       | Packaging details and included items (e.g., box contents, setup instructions, packaging material). |
-| **warrant\_and\_certification** | —                    | string       | Legal and quality guarantees (e.g., warranty period, return policies, certifications).             |
-| **sustainability**              | —                    | string       | Eco-friendly and repairability attributes (e.g., recyclability, energy efficiency, eco-labels).    |
-| **review\_metrics**             | —                    | string       | User feedback data (e.g., ratings, number of reviews).                                             |
-| **agentic\_tags**               | ideal\_use\_case     | string       | Main intended usage scenario or best settings where product shines.                                |
-|                                 | persona\_fit         | string       | Fit to a particular user persona (types of people who benefit most).                               |
-|                                 | lifestyle\_alignment | string       | Lifestyle or value context the product aligns with.                                                |
-| **advertiser\_info**            | advertiser\_name     | string       | Name of the advertiser/seller.                                                                     |
-|                                 | advertiser\_website  | string (URL) | Official advertiser website.                                                                       |
-|                                 | advertiser\_logo     | string (URL) | URL of advertiser’s logo image.                                                                    |
-|                                 | advertiser\_category | string       | Industry or category (e.g., Footwear, Electronics).                                                |
-| **monetization\_info**          | commission\_rate     | numeric      | Commission percentage per sale.                                                                    |
-|                                 | referral\_period     | string       | Referral cookie window (e.g., “30 days”).                                                          |
-
-
-
-
+| **Category**                  | **Field**           | **Type**     | **Description**                                                                                    |
+| ----------------------------- | ------------------- | ------------ | -------------------------------------------------------------------------------------------------- |
+| **product_identity**          | product_title       | string       | Name of the product (enriched).                                                                    |
+|                               | product_description | string       | Text description explaining the product (enriched).                                                |
+|                               | product_link        | string (URL) | Tracking link to the product detail page.                                                          |
+|                               | product_image_link  | string (URL) | URL of the main product image.                                                                     |
+|                               | currency            | string       | Currency code (ISO 4217, e.g., USD, EUR).                                                          |
+|                               | price               | numeric      | Current product price.                                                                             |
+|                               | availability        | string       | Stock status (e.g., “In Stock”, “Out of Stock”, “Preorder”).                                       |
+|                               | brand               | string       | Manufacturer or seller’s brand name.                                                               |
+| **physical_characteristics**  | —                   | string       | Tangible, visible product attributes (e.g., color, size, weight, material).                        |
+| **technical_specs**           | —                   | string       | Hardware, electronic or digital specifications (e.g., battery life, connectivity, power rating).   |
+| **functional_features**       | —                   | string       | Usability-related attributes (e.g., water resistance, modes of operation, safety features).        |
+| **compatibility**             | —                   | string       | Contexts and supported systems (e.g., device compatibility, universal fit, target audience).       |
+| **performance_metrics**       | —                   | numeric      | Quantifiable product performance (e.g., speed, noise level, battery duration, comfort rating).     |
+| **content_and_packaging**     | —                   | string       | Packaging details and included items (e.g., box contents, setup instructions, packaging material). |
+| **warrant_and_certification** | —                   | string       | Legal and quality guarantees (e.g., warranty period, return policies, certifications).             |
+| **sustainability**            | —                   | string       | Eco-friendly and repairability attributes (e.g., recyclability, energy efficiency, eco-labels).    |
+| **review_metrics**            | —                   | string       | User feedback data (e.g., ratings, number of reviews).                                             |
+| **agentic_tags**              | ideal_use_case      | string       | Main intended usage scenario or best settings where product shines.                                |
+|                               | persona_fit         | string       | Fit to a particular user persona (types of people who benefit most).                               |
+|                               | lifestyle_alignment | string       | Lifestyle or value context the product aligns with.                                                |
+| **advertiser_info**           | advertiser_name     | string       | Name of the advertiser/seller.                                                                     |
+|                               | advertiser_website  | string (URL) | Official advertiser website.                                                                       |
+|                               | advertiser_logo     | string (URL) | URL of advertiser’s logo image.                                                                    |
+|                               | advertiser_category | string       | Industry or category (e.g., Footwear, Electronics).                                                |
+| **monetization_info**         | commission_rate     | numeric      | Commission percentage per sale.                                                                    |
+|                               | referral_period     | string       | Referral cookie window (e.g., “30 days”).                                                          |
 
 <Feedback />
