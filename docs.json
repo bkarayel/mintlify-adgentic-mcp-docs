@@ -1,0 +1,35 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "aspen",
+  "name": "Adgentic",
+  "colors": { "primary": "#FFAF4C" },
+  "logo": {
+    "light": "/adgentic-light.svg",
+    "dark": "/adgentic-dark.svg"
+  },
+  "navigation": {
+    "groups": [
+      { "group": "Introduction", "pages": ["introduction"] },
+      {
+        "group": "MCP Server",
+        "pages": [
+          "what-you-get",
+          "how-it-works",
+          "match-adgentic-products-tool",
+          "authentication",
+          "deployment-details",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "API",
+        "pages": [
+          "Overview",
+          "GET-adgentic_products"
+        ]
+      }
+    ]
+  },
+  "topbarLinks": [{ "name": "github", "url": "https://github.com/adgentic" }],
+  "head": { "links": [{ "rel": "stylesheet", "href": "/style.css" }] }
+}

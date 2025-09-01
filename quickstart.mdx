@@ -1,0 +1,173 @@
+---
+title: "Quickstart Guide"
+description: "Run your first calls to the Adgentic MCP Server in minutes."
+---
+
+import Copy from "/snippets/_copy-actions.mdx"
+import Feedback from "/snippets/_feedback.mdx"
+
+<Copy />
+
+## Prerequisites
+
+Make sure you have Python 3.11+ and the fastmcp library installed.
+
+- Python 3.11+
+- fastmcp client library
+
+```bash
+pip install fastmcp
+```
+
+## Set Your Adgentic API Key
+```bash
+# macOS/Linux
+export ADGENTIC_API_KEY="<YOUR_KEY>"
+
+# Windows
+set ADGENTIC_API_KEY="<YOUR_KEY>"
+```
+
+<Warning>If your MCP server is deployed with ADGENTIC_API_KEY in its environment, you can omit api_key in the call.</Warning>
+
+## Run the Sample Script
+
+```bash Python highlight={7-9,17,21,26} lines expandable
+import asyncio
+import json
+import os
+from fastmcp import Client
+from fastmcp.errors import MCPError
+
+MCP_URL = "https://mcp.adgenticplatform.com/mcp/"
+TOOL_NAME = "match_adgentic_products"
+API_KEY = os.environ.get("ADGENTIC_API_KEY")
+
+async def run_quickstart():
+    if not API_KEY:
+        print("Warning: ADGENTIC_API_KEY environment variable not set.")
+
+    try:
+        async with Client(MCP_URL) as client:
+            print("--- Listing Available Tools ---")
+            tools = await client.list_tools()
+            print("Available tools:", [t.name for t in tools])
+
+            print("\n--- Testing Non-Commercial Prompt ---")
+            non_prompt = "Write me a poem about summer"
+            r1 = await client.call_tool(TOOL_NAME, {"prompt": non_prompt, "api_key": API_KEY, "context": {"country": "US"}})
+            print(json.dumps(json.loads(r1[0].text), indent=2))
+
+            print("\n--- Testing Commercial Prompt ---")
+            com_prompt = "I am training for a marathon and I need a waterproof smartwatch under $300"
+            r2 = await client.call_tool(TOOL_NAME, {"prompt": com_prompt, "api_key": API_KEY, "context": {"country": "US"}})
+            print(json.dumps(json.loads(r2[0].text), indent=2))
+
+    except MCPError as e:
+        print(f"MCP error: {e}")
+    except json.JSONDecodeError:
+        print("Error: Response was not valid JSON")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+if __name__ == "__main__":
+    asyncio.run(run_quickstart())
+```
+
+
+<Panel>
+<ResponseExample>
+
+```json title="Commercial Intent"
+{
+  "response": true,
+  "products": [
+    {
+      "basic_identity": {
+        "product_title": "Classic Red Sneakers",
+        "product_description": "Red running shoes for men and women",
+        "product_link": "https://shop.example.com/products/987",
+        "product_image_link": "https://cdn.example.com/products/red-shoes.jpg",
+        "currency": "USD",
+        "price": 89.0,
+        "availability": "In Stock",
+        "brand": "Example Brand"
+      },
+      "physical_characteristics": {
+        "color": "Red",
+        "size": "US 9",
+        "weight": "0.8 kg",
+        "material": "Synthetic Mesh"
+      },
+      "technical_specs": {
+        "sku": "SNK-RED-987",
+        "dimensions": "30 x 10 x 12 cm"
+      },
+      "functional_features": {
+        "water_resistant": false,
+        "breathable": true,
+        "slip_resistant": true
+      },
+      "compatability": {
+        "gender": ["Men", "Women"],
+        "sports": ["Running", "Casual Wear"]
+      },
+      "performance_metrics": {
+        "durability_score": 8.5,
+        "comfort_rating": 9.2
+      },
+      "content_and_packaging": {
+        "box_contents": ["1 Pair Sneakers"],
+        "packaging_material": "Recyclable Cardboard"
+      },
+      "warrant_and_certification": {
+        "warranty_period": "12 months",
+        "certifications": ["ISO 9001"]
+      },
+      "sustainability": {
+        "eco_friendly_materials": true,
+        "recyclable": true
+      },
+      "review_metrics": {
+        "average_rating": 4.6,
+        "review_count": 254
+      },
+      "user_context_tags": {
+        "ideal_use_case": "Daily running and casual wear",
+        "persona_fit": "Active lifestyle, fashion-conscious",
+        "lifestyle_alignment": "Urban, sporty"
+      },
+      "advertiser_info": {
+        "advertiser_name": "Example Shop",
+        "advertiser_website": "https://shop.example.com",
+        "advertiser_logo": "https://cdn.example.com/logo.png",
+        "advertiser_category": "Footwear & Apparel"
+      },
+      "monetization_info": {
+        "commission_rate": "12%",
+        "referral_period": "30 days"
+      }
+    }
+  ]
+}
+```
+
+```json title="Non-commercial Intent"
+{
+  "response": false,
+  "products": []
+}
+```
+
+</ResponseExample>
+</Panel>
+
+## Error Handling
+
+| Error                            | Cause / Fix                                                                                                                                                 |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **401 Unauthorized**             | Missing or invalid `ADGENTIC_API_KEY`. Set env var correctly or pass `api_key` in the tool call.                                                            |
+| **400 Bad Request**              | Malformed request (e.g. missing prompt or invalid context). Ensure payload contains `prompt` and valid JSON.                                                |
+| **500 Server Error**             | Temporary issue on the Adgentic MCP server. Retry; if persists, contact support: [support@adgenticplatform.com](mailto:support@adgenticplatform.com)        |
+| **Timeouts & Connection Errors** | Network instability or unreachable server. Verify connectivity and endpoint: [https://mcp.adgenticplatform.com/mcp/](https://mcp.adgenticplatform.com/mcp/) |
+<Feedback />

@@ -1,0 +1,66 @@
+---
+title: How It Works
+description: The Adgentic MCP server enables your agent to find the top-matching product for user prompts that contain commercial intent.
+mode: center
+---
+
+import Copy from "/snippets/_copy-actions.mdx"
+import Feedback from "/snippets/_feedback.mdx"
+
+<Copy />
+
+<AccordionGroup>
+
+  <Accordion title="1) Detect commercial intent">
+    - Your agent can run its own intent detection in user prompts
+    - Or use Adgentic’s built-in intent analysis microservice
+
+    **Built-in Adgentic Intent Classification**
+    - Non-commercial → `{"response": false, "offers": []}`
+    - Commercial or Potential Commercial → `{"response": true, "offers": [...]}`
+
+    <Tip>
+      If you’re unsure, send your raw user prompt to the MCP and let the gateway classify it.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="2) Call the MCP tool">
+    **Tool:** `match_adgentic_products`
+
+    - Pass the user’s `prompt` and optional `context` (e.g. `{ "country": "US" }`)
+    - `location/country` helps return geo-relevant offers (shipping/availability)
+    - Include your `api_key` unless it’s set in the MCP server environment
+
+
+
+    ```json Minimal request payload JSON
+    {
+      "prompt": "I am training for a marathon and I need a waterproof smartwatch under $300",
+      "api_key": "<YOUR_KEY>",
+      "context": { "country": "US" }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="3) Adgentic matches offers">
+    - **Commercial intent** → best-matching products (max. 5 offers)
+    - **Potential commercial** → multiple relevant products
+    - **Non-commercial** → `{"response": false, "offers": []}`
+
+
+    ```json     Example products shape
+    {
+      "product_title": "Classic Red Sneakers",
+      "product_link": "https://shop.example.com/products/987",
+      "product_image_link": "https://cdn.example.com/products/red-shoes.jpg",
+      "product_description": "Red running shoes for men and women",
+      "price": 89.0,
+      "currency": "USD",
+      "advertiser_name": "Example Shop"
+    }
+    ```
+  </Accordion>
+
+</AccordionGroup>
+
+<Feedback />

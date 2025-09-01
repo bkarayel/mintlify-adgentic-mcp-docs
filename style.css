@@ -1,0 +1,81 @@
+/* Global styles for the docs site */
+.nav-logo svg { color: var(--mint-c-text); }
+.site-header a svg { color: var(--mint-c-text); }
+
+/* --- Pager: show only titles (hide descriptions) --- */
+nav[aria-label="Pagination"] p,
+nav[aria-label="Page navigation"] p,
+nav[aria-label="Docs pagination"] p,
+.page-nav p,
+.doc-pagination p {
+  display: none !important;
+}
+
+/* tighten heading spacing since the paragraph is gone */
+nav[aria-label="Pagination"] h2,
+nav[aria-label="Pagination"] h3,
+.page-nav h2,
+.page-nav h3,
+.doc-pagination h2,
+.doc-pagination h3 {
+  margin: 0 !important;
+}
+
+/* (optional) slimmer pager + no vertical divider */
+nav[aria-label="Pagination"] hr,
+nav[aria-label="Pagination"] .divider {
+  display: none !important;
+}
+
+/* Hide the description/excerpt in the bottom pager (show only titles) */
+nav[aria-label="Pagination"] .font-semibold + span {
+  display: none !important;
+}
+
+/* Safety nets for other builds/labels */
+.page-nav .font-semibold + span,
+.doc-pagination .font-semibold + span {
+  display: none !important;
+}
+
+/* Alt: target the exact Tailwind class from your screenshot */
+nav[aria-label="Pagination"] span.lg\:w-72 {
+  display: none !important;
+}
+/* Hide the description/excerpt span in the pager */
+footer nav .font-semibold + span,
+footer nav .font-semibold ~ span {
+  display: none !important;
+}
+
+/* Catch Tailwind “truncate + lg:w-72” description spans via attribute selectors */
+footer nav [class*="truncate"][class*="lg:w-72"] {
+  display: none !important;
+}
+
+/* Broad fallback: any truncated span inside the pager */
+footer nav span.truncate {
+  display: none !important;
+}
+
+/* Hide the excerpt/description in the bottom pager (exact DOM from your screenshot) */
+nav[aria-label="Pagination"] a > div > span:nth-child(2) {
+  display: none !important;
+}
+
+/* Extra nets (any truncated span there) */
+nav[aria-label="Pagination"] a span.truncate,
+nav[aria-label="Pagination"] a span.lg\:w-72 {
+  display: none !important;
+}
+
+/* Keep only the title in Previous/Next cards; hide excerpts */
+nav[aria-label="Pagination"] a > div > span:not(:first-child) {
+  display: none !important;
+}
+
+/* Fallbacks for variants */
+nav a > div > span.truncate { display: none !important; }
+nav a > div > span.lg\:w-72 { display: none !important; }
+
+footer nav a > div > span:not(:first-child) { display:none !important; }

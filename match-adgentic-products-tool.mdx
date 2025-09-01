@@ -1,0 +1,31 @@
+---
+title: match_adgentic_products
+description: Parameters and payload for match_adgentic_products.
+---
+
+import Copy from "/snippets/_copy-actions.mdx"
+import Feedback from "/snippets/_feedback.mdx"
+
+<Copy />
+
+<p style={{ fontSize: '1.375rem', fontWeight: 700, lineHeight: 1.3 }}>
+  Tool Name: <code>match_adgentic_products</code>
+</p>
+
+Searches and returns structured offers based on the user’s prompt and optional context.
+
+# Parameters
+
+<ParamField path="prompt" type="string" required>
+  **User Query:** e.g. I am training for a marathon and I need a waterproof smartwatch under $300
+</ParamField>
+
+<ParamField path="api_key" type="string" required>
+  Required unless set via the environment variable <code>ADGENTIC_API_KEY</code>.
+</ParamField>
+
+<ParamField path="context" type="object" optional>
+  Optional. Location/Country, e.g. <code>&#123; "country": "US" &#125;</code>
+</ParamField>
+
+<Feedback />

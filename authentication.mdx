@@ -1,0 +1,53 @@
+---
+title: Authentication
+description: "To connect Adgentic MCP Server, you must sign up to the Adgentic Publisher Platform and get an ADGENTIC_API_KEY."
+mode: wide
+---
+
+import CopyActions from "/snippets/_copy-actions.mdx"
+import Feedback from "/snippets/_feedback.mdx"
+
+
+<Card
+  title="1) Sign up on Adgentic Publisher Platform"
+  icon="arrow-up-right-from-square"
+  href="https://publisher.adgenticplatform.com/"
+  arrow="true"
+>
+  Create an account to access the dashboard.
+</Card>
+
+<Card
+  title="2) Obtain your ADGENTIC_API_KEY"
+  icon="arrow-up-right-from-square"
+  href="https://publisher.adgenticplatform.com/"
+  arrow="true"
+>
+  Go to <em>API Keys</em> in the dashboard and create a new key.
+</Card>
+
+<Card title="3) Provide your ADGENTIC_API_KEY either:">
+  <ul>
+    <li>Per call: <code>"api_key": "&lt;YOUR_KEY&gt;"</code></li>
+    <li>
+      Or as an environment variable:
+      <p><strong>macOS / Linux (bash, zsh)</strong></p>
+      <pre><code>export ADGENTIC_API_KEY="&lt;YOUR_KEY&gt;"</code></pre>
+
+      <p><strong>Windows (CMD)</strong></p>
+      <pre><code>set ADGENTIC_API_KEY="&lt;YOUR_KEY&gt;"</code></pre>
+
+      <p><strong>Windows (PowerShell)</strong></p>
+      <pre><code>$Env:ADGENTIC_API_KEY="&lt;YOUR_KEY&gt;"</code></pre>
+    </li>
+  </ul>
+</Card>
+
+<Feedback />
+
+{/* keep your pager tweak if you still need it */}
+<style>{`
+  nav a > div > span:not(:first-child) {
+    display: none !important;
+  }
+`}</style>
