@@ -7,7 +7,7 @@
     "light": "/adgentic-light.svg",
     "dark": "/adgentic-dark.svg"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon.svg",
   "navigation": {
     "groups": [
       { "group": "Introduction", "pages": ["introduction"] },
@@ -40,7 +40,7 @@
   "head": {
     "links": [
       { "rel": "stylesheet", "href": "/style.css" },
-      { "rel": "icon", "type": "image/png", "href": "/favicon.png" }
+      { "rel": "icon", "type": "image/svg+xml", "href": "/favicon.svg" }
     ]
   }
 }
