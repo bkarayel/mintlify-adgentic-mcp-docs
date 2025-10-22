@@ -7,7 +7,10 @@
     "light": "/adgentic-light.svg",
     "dark": "/adgentic-dark.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/favicon.svg",
+    "dark":"/favicon.svg"
+  },
   "navigation": {
     "groups": [
       { "group": "Introduction", "pages": ["introduction"] },
@@ -31,7 +34,7 @@
         "group": "API",
         "pages": [
           "Overview",
-          "GET-adgentic_products"
+          "POST-adgentic_products"
         ]
       }
     ]
