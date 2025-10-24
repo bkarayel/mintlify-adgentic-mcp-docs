@@ -35,10 +35,13 @@ set ADGENTIC_API_KEY="<YOUR_KEY>"
 ```bash Python highlight={5-6, 10,14,34} lines expandable
 import asyncio
 import json
+import os
 from fastmcp import Client
 
 MCP_URL = "https://mcp.adgenticplatform.com/mcp/"
 API_KEY = "ADGENTIC_API_KEY"
+#it set as an environment variable
+API_KEY = os.environ.get("ADGENTIC_API_KEY")
 
 async def quickstart():
     async with Client(MCP_URL) as client:
@@ -85,7 +88,7 @@ if __name__ == "__main__":
     asyncio.run(quickstart())
 ```
 
-<Warning>It is recommended to run this script using uv run for consistent dependency management and environment isolation.</Warning>
+<Tip>It is recommended to run this script using uv run for consistent dependency management and environment isolation.</Tip>
 
 
 <Panel>
