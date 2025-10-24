@@ -28,22 +28,27 @@ import Feedback from "/snippets/_feedback.mdx"
 
 <Card title="3) Provide your ADGENTIC_API_KEY either:">
   <ul>
-    <li>Per call: <code>api_key: &lt;YOUR_KEY&gt;</code></li>
+    <li>
+      Per call:
+      <code>api_key: &lt;YOUR_KEY&gt;</code>
+    </li>
     <li>
       Or as an environment variable:
-      ```bash
-      <p><strong>macOS / Linux (bash, zsh)</strong></p>
-      <pre><code>export ADGENTIC_API_KEY=&lt;YOUR_KEY&gt;</code></pre>
-
-      <p><strong>Windows (CMD)</strong></p>
-      <pre><code>set ADGENTIC_API_KEY=&lt;YOUR_KEY&gt;</code></pre>
-
-      <p><strong>Windows (PowerShell)</strong></p>
-      <pre><code>$Env:ADGENTIC_API_KEY=&lt;YOUR_KEY&gt;</code></pre>
-      ```
+      <Tabs>
+        <Tab title="macOS / Linux (bash, zsh)">
+          <CodeBlock language="bash">export ADGENTIC_API_KEY=&lt;YOUR_KEY&gt;</CodeBlock>
+        </Tab>
+        <Tab title="Windows (CMD)">
+          <CodeBlock language="bash">set ADGENTIC_API_KEY=&lt;YOUR_KEY&gt;</CodeBlock>
+        </Tab>
+        <Tab title="Windows (PowerShell)">
+          <CodeBlock language="bash">$Env:ADGENTIC_API_KEY=&lt;YOUR_KEY&gt;</CodeBlock>
+        </Tab>
+      </Tabs>
     </li>
   </ul>
 </Card>
+
 
 <Feedback />
 
